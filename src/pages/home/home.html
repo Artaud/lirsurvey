@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-navbar color="secondary">
+    <ion-title>
+      Dotazníky
+    </ion-title>
+<!--     <ion-buttons end>
+      <button ion-button icon-only (click)="addItem()"><ion-icon name="add-circle"></ion-icon></button>
+    </ion-buttons>
+ -->  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-fab right bottom>
+    <button ion-fab color="primary" (click)="addSurveyTemplate()"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+<!--   <ion-fab left bottom>
+    <button ion-fab color="primary" (click)="goToShowFormlyForm()"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+ -->
+  <ion-title>
+    Survey Templates
+  </ion-title>
+  <ion-list reorder="true" (ionItemReorder)="reorderItem($event)">
+    <ion-item  *ngFor="let survey_template of survey_templates" (click)="editSurveyTemplate(survey_template)">
+      {{survey_template.title}}
+      <button ion-button round item-right (click)="editSurveyTemplate(survey_template)"><ion-icon name="settings"></ion-icon></button>
+    </ion-item>
+  </ion-list>
+
+  <ion-title>
+    Surveys
+  </ion-title>
+
+  <ion-title>
+    Dotazníky
+  </ion-title>
+  <ion-list reorder="true" (ionItemReorder)="reorderItem($event)">
+    <ion-item  *ngFor="let item of items" (click)="viewItem(item)">
+      {{item.title}}
+      <button ion-button round item-right (click)="editItem(item)"><ion-icon name="settings"></ion-icon></button>
+    </ion-item>
+  </ion-list>
+</ion-content>
