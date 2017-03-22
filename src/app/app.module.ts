@@ -7,7 +7,7 @@ import { ItemDetailPage } from '../pages/item-detail/item-detail';
 import { BuildFormPage } from '../pages/build-form/build-form';
 import { BuildDynamicFormPage } from '../pages/build-dynamic-form/build-dynamic-form';
 import { IonicStorageModule } from '@ionic/storage';
-import { TodoData, SurveyTemplateData } from '../providers/data';
+import { TodoData, SurveyTemplateData, SurveyData } from '../providers/data';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { DynamicFormComponent } from './dynamic-form.component'
@@ -19,7 +19,8 @@ import { ShowFormlyFormPage } from '../pages/show-formly-form/show-formly-form';
 import { EditSurveyPage } from '../pages/edit-survey/edit-survey';
 import { CreateSurveyTemplatePage } from '../pages/create-survey-template/create-survey-template';
 import { AddTemplateFieldPage } from '../pages/add-template-field/add-template-field';
-
+import { RunSurveyPage } from '../pages/run-survey/run-survey';
+import { Utils } from '../utils/utils.ts';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { AddTemplateFieldPage } from '../pages/add-template-field/add-template-f
     ShowFormlyFormPage,
     EditSurveyPage,
     CreateSurveyTemplatePage,
-    AddTemplateFieldPage
+    AddTemplateFieldPage,
+    RunSurveyPage
   ],
   imports: [
     BrowserModule,
@@ -56,8 +58,9 @@ import { AddTemplateFieldPage } from '../pages/add-template-field/add-template-f
     ShowFormlyFormPage,
     EditSurveyPage,
     CreateSurveyTemplatePage,
-    AddTemplateFieldPage
+    AddTemplateFieldPage,
+    RunSurveyPage
   ],
-  providers: [TodoData, SurveyTemplateData, {provide: ErrorHandler, useClass: IonicErrorHandler}]
+  providers: [Utils, TodoData, SurveyTemplateData, SurveyData, {provide: ErrorHandler, useClass: IonicErrorHandler}]
 })
 export class AppModule {}

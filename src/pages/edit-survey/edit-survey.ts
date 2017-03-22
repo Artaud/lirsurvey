@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { FormlyFieldConfig } from 'ng-formly';
+import { Validators, FormGroup } from '@angular/forms';
 
 /*
   Generated class for the EditSurvey page.
@@ -13,10 +15,17 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class EditSurveyPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+    console.log(this.navParams.data);
+    console.log(this.templateFields);
+  }
+
+  templateField: FormlyFieldConfig;
+  survey_template = {fieldGroup: this.navParams.get('survey_template')};
+  form: FormGroup = new FormGroup({});
+  templateFields: Array<FormlyFieldConfig> = [ this.survey_template ];
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad EditSurveyPage');
   }
 
 }

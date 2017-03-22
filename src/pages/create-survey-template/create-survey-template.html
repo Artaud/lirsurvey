@@ -12,17 +12,18 @@
 
 </ion-header>
 
-
 <ion-content padding>
 
-  <form class="formly" role="form" novalidate [formGroup]="form" (ngSubmit)="submit(template)">
-      <formly-form [model]="template" [fields]="templateFields">
-          <!-- <button ion-button type="submit">Submit the form</button> -->
-      </formly-form>
-  </form>
-      <button ion-button (click)="removeLastTemplateField()">Remove last field</button>
+  <ion-item>
+    <ion-label floating>Title</ion-label>
+    <ion-input type="text" [(ngModel)]="title"></ion-input>
+  </ion-item>
 
-  <button ion-button (click)="testAddTemplateField()">Test Add field</button>
+  <form class="formly" role="form" novalidate [formGroup]="form" (ngSubmit)="submit(template)">
+      <formly-form [model]="template" [fields]="templateFields"></formly-form>
+  </form>
+
+  <button ion-button (click)="removeLastTemplateField()">Remove last field</button>
   <button ion-button (click)="selectTemplateFieldToAdd()">Add field</button>
   <button ion-button type="submit" (click)="saveTemplate()">Save template</button>
 

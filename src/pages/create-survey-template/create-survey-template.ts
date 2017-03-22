@@ -19,10 +19,11 @@ export class CreateSurveyTemplatePage {
 
     parent = this.navParams.get('parent');
 
-
+    title;
     templateField: FormlyFieldConfig;
     form: FormGroup = new FormGroup({});
-    initFieldGroup = {fieldGroup: [
+    initFieldGroup = {
+      fieldGroup: [
         {
           className: '',
           key: 'firstName',
@@ -81,7 +82,7 @@ export class CreateSurveyTemplatePage {
           validators: {
             validation: Validators.compose([Validators.required])
           }
-        }
+        },
       ]};
 
     // Initial form fields
@@ -89,41 +90,20 @@ export class CreateSurveyTemplatePage {
 
     selectTemplateFieldToAdd(){
       let addModal = this.modalCtrl.create(AddTemplateFieldPage);
-
       addModal.onDidDismiss((newTemplateField) => {
         if(newTemplateField){
           this.addTemplateField(newTemplateField);
+          console.log(newTemplateField);
         }
       });
-
       addModal.present();
-    }
-
-    testAddTemplateField(){
-      let testTempField =
-       {
-        className: '',
-        key: 'banana',
-        type: 'input',
-        templateOptions: {
-            type: 'input',
-            label: 'Email address',
-            placeholder: 'Enter email'
-        },
-        validators: {
-          validation: Validators.compose([Validators.required])
-        }
-      }
-
-      this.templateFields = [];
-      this.initFieldGroup.fieldGroup.push(testTempField);
-      this.templateFields = [this.initFieldGroup];
     }
 
     addTemplateField(templateField){
       this.templateFields = [];
       this.initFieldGroup.fieldGroup.push(templateField);
       this.templateFields = [this.initFieldGroup];
+      console.log(this.templateFields);
     }
 
     removeLastTemplateField(){
@@ -135,6 +115,7 @@ export class CreateSurveyTemplatePage {
     }
 
     saveTemplate(){
+      // console.log(this.templateFields);
       this.parent.saveSurveyTemplate(this.templateFields);
       this.navCtrl.pop()
     }

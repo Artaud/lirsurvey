@@ -7,6 +7,7 @@ import { BuildDynamicFormPage } from '../build-dynamic-form/build-dynamic-form';
 import { ShowFormlyFormPage } from '../show-formly-form/show-formly-form';
 import { EditSurveyPage } from '../edit-survey/edit-survey';
 import { CreateSurveyTemplatePage } from '../create-survey-template/create-survey-template';
+import { RunSurveyPage } from '../run-survey/run-survey';
 
 import { TodoData } from '../../providers/data';
 import { SurveyTemplateData } from '../../providers/data';
@@ -30,12 +31,12 @@ export class HomePage {
     this.surveyTemplateDataService.getData().then((survey_templates) => {
       if(survey_templates){
         this.survey_templates = JSON.parse(survey_templates);
+        console.log(this.survey_templates);
       }
     });
-
   }
 
-  ionViewDidLoad(){ }
+  ionViewDidLoad(){}
 
   goToBuildForm(){
     this.navCtrl.push(BuildDynamicFormPage);
@@ -52,7 +53,8 @@ export class HomePage {
     // do nothing as we never want to just view the template -- we always go to edit
   }
 
-  editSurveyTemplate(survey_template){
+  editSurveyTemplate(e, survey_template){
+    e.stopPropagation();
     this.navCtrl.push(EditSurveyPage, {
       survey_template: survey_template
     });
@@ -67,26 +69,28 @@ export class HomePage {
     this.survey_templates.push(template_definition);
     this.saveSurveyTemplates();
   }
+  deleteSurveyTemplate(e, survey_template){
+    e.stopPropagation();
+    this.survey_templates.splice(this.survey_templates.indexOf(survey_template),1);
+    this.saveSurveyTemplates();
+  }
+
+  startNewSurvey(e, survey_template){
+    e.stopPropagation();
+    this.navCtrl.push(RunSurveyPage, {parent: this, survey_template: survey_template});
+  }
 
   extractTemplateDefinitionFromDOMObject(survey_template){
-    // let temp_def = {fieldGroup: survey_template[0].fieldGroup};
-    // let temp_def = survey_template;
     let temp = survey_template[0].fieldGroup;
-    // debugger;
-
-    // var i=0;
     let temp_def = [];
     for (var i=0; i < temp.length; i = i + 1) {
-
       temp_def[i] = {
         className: temp[i].className,
         key: temp[i].key,
         type: temp[i].type,
         templateOptions: temp[i].templateOptions
       }
-
     }
-
     return temp_def;
   }
 
@@ -94,7 +98,6 @@ export class HomePage {
     this.survey_templates = reorderArray(this.survey_templates, indexes);
     this.saveSurveyTemplates();
   }
-
 
   addItem(){
     let addModal = this.modalCtrl.create(AddItemPage);

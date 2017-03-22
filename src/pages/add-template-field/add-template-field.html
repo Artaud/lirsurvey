@@ -1,13 +1,7 @@
-<!--
-  Generated template for the AddTemplateField page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
   <ion-toolbar color="secondary">
     <ion-title>
-        Add template field
+        Přidat pole
     </ion-title>
         <ion-buttons end>
             <button ion-button icon-only (click)="close()"><ion-icon name="close"></ion-icon></button>
@@ -15,29 +9,62 @@
     </ion-toolbar>
 </ion-header>
 
-
 <ion-content padding>
 
   <ion-list>
 
     <ion-item>
-      <ion-label stacked>Field type</ion-label>
+      <ion-label stacked>Druh pole</ion-label>
       <ion-select [(ngModel)]="fieldType" interface="action-sheet">
-        <ion-option value="input" selected="true">Short text</ion-option>
-        <ion-option value="textarea">Long text</ion-option>
-        <ion-option value="select">Select</ion-option>
-        <ion-option value="checkbox">Checkbox</ion-option>
-        <ion-option value="multicheckbox">Checkbox group</ion-option>
+        <ion-option value="input" selected="true">Krátký text</ion-option>
+        <ion-option value="textarea">Dlouhý text</ion-option>
+        <ion-option value="select">Dropdown</ion-option>
+        <ion-option value="checkbox">Checkbox - ano/ne</ion-option>
+        <ion-option value="multicheckbox">Skupina checkboxů</ion-option>
       </ion-select>
     </ion-item>
 
     <ion-item>
-      <ion-label stacked>Question</ion-label>
+      <ion-label stacked>Otázka</ion-label>
       <ion-input type="textarea" [(ngModel)]="question"></ion-input>
+      {{question}}
     </ion-item>
+
+    <div *ngIf="fieldType=='input'"></div>
+
+    <div *ngIf="fieldType=='textarea'"></div>
+
+    <div *ngIf="fieldType=='select'">
+      Select -- option fields should be rendered
+      <ion-label stacked>Možnosti</ion-label>
+      <ion-list reorder="true" (ionItemReorder)="reorderItem($event)">
+        <div  *ngFor="let selectOption of selectOptions">
+          <ion-input type="input" [(ngModel)]="selectOption.label">Option: {{selectOption.label}}</ion-input>
+        </div>
+      </ion-list>
+      <button full ion-button color="secondary" (click)="addSelectOption()">Add select option</button>
+    </div>
+
+
+    <div *ngIf="fieldType=='checkbox'">
+      <!-- <ion-label stacked>Checkbox</ion-label> -->
+      <!-- <ion-input type="input" [(ngModel)]="question"></ion-input> -->
+    </div>
+
+    <div *ngIf="fieldType=='multicheckbox'">multicheckbox -- render options
+      Select -- option fields should be rendered
+      <ion-label stacked>Možnosti</ion-label>
+      <ion-list reorder="true" (ionItemReorder)="reorderItem($event)">
+        <div  *ngFor="let multicheckboxOption of multicheckboxOptions">
+          <ion-input type="input" [(ngModel)]="multicheckboxOption.value">Option: {{multicheckboxOption.value}}</ion-input>
+        </div>
+      </ion-list>
+      <button full ion-button color="secondary" (click)="addMulticheckboxOption()">Add select option</button>
+    </div>
 
   </ion-list>
 
-  <button full ion-button color="secondary" (click)="saveTemplateField()">Save</button>
+
+  <button full ion-button color="primary" (click)="saveTemplateField()">Save</button>
 
 </ion-content>
