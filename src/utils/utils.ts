@@ -5,6 +5,80 @@ export class Utils {
 
     constructor(){};
 
+    static convertToCSV(objArray) {
+        console.log('convertToCSV');
+        console.log(Object.getOwnPropertyNames(objArray[0]));
+        let props = Object.getOwnPropertyNames(objArray[0]);
+        var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
+        var str = '';
+
+        console.log('array');
+        console.log(array);
+
+        // Saving header
+        var header_line = '';
+        for (var i = 0; i < props.length; i++) {
+            if (header_line != '') header_line += ';'
+            if (typeof props[i] != 'object') {
+                header_line += props[i];
+            } else {
+                let keys = Object.getOwnPropertyNames(props[i]);
+                console.log("keys");
+                console.log(keys);
+                // We have an object, i.e. multicheckbox array
+                // TODO iter over it and list into one field
+                // Need to ensure correct order
+            }
+            console.log('header line = ' + header_line);
+        }
+        str += header_line + '\r\n';
+
+        // Saving data
+        for (var i = 0; i < array.length; i++) {
+            var line = '';
+            for (var index in props) {
+                if (line != '') line += ';'
+
+                if (typeof array[i][props[index]] == 'object') {
+                    var ss = '';
+                    for (var s in array[i][props[index]]){
+                        if (ss != '') ss += ',';
+                        if (array[i][props[index]][s] == true) ss += s;
+                    }
+                    line += ss;
+                    console.log(array[i][props[index]]);
+                } else {
+                    line += array[i][props[index]];
+                }
+
+                // console.log('props');
+                // console.log(array[i][props[index]]);
+                // console.log(typeof array[i][props[index]] == 'object');
+
+
+                // if (typeof props[index] != 'object') {
+                //     line += array[i][props[index]];
+                //     console.log('line = ' + line);
+                // } else {
+                //     let keys = Object.getOwnPropertyNames(props[index]);
+                //     console.log("data keys");
+                //     console.log(keys);
+                // }
+            }
+            console.log('line = ' + line);
+            // for (var index in array[i]) {
+            //     if (line != '') line += ';'
+            //     // line += ';'
+
+            //     line += array[i][index];
+            // }
+
+            str += line + '\r\n';
+        }
+
+        return str;
+    }
+
     static toCamelCase(sentenceCase: string) {
     var out = "";
     if (sentenceCase) {

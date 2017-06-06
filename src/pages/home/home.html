@@ -1,41 +1,58 @@
 <ion-header>
-  <ion-navbar color="secondary">
+  <ion-navbar color="primary">
     <ion-title>
-      LET IT ROLL surveys
+      <img [src]="titleImageUrl" height="40px">
     </ion-title>
-<!--     <ion-buttons end>
-      <button ion-button icon-only (click)="addItem()"><ion-icon name="add-circle"></ion-icon></button>
+
+     <ion-buttons end>
+    <ion-card-content>
+      <button ion-button (click)="goToSettings()"><ion-icon name="settings"></ion-icon></button>
+    </ion-card-content>
     </ion-buttons>
- -->  </ion-navbar>
+
+
+  </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding background-image="{{ bkgImageUrl }}">
+  <!-- <img [src]="base64Image" *ngIf="base64Image" /> -->
+
   <ion-fab right bottom>
-    <button ion-fab color="primary" (click)="addSurveyTemplate()"><ion-icon name="add"></ion-icon></button>
+    <button ion-fab color="white" (click)="addSurveyTemplate()"><ion-icon name="add"></ion-icon></button>
   </ion-fab>
 <!--   <ion-fab left bottom>
     <button ion-fab color="primary" (click)="goToShowFormlyForm()"><ion-icon name="add"></ion-icon></button>
   </ion-fab>
  -->
-  <ion-title>
-    Survey Templates
-  </ion-title>
   <ion-list>
+    <ion-item>
+      <ion-title>
+        Vzory
+      </ion-title>
+    </ion-item>
     <ion-item *ngFor="let survey_template of survey_templates" (click)="startNewSurvey($event, survey_template)">
-      {{survey_template}}
-      <button ion-button round item-right (click)="editSurveyTemplate($event, survey_template)"><ion-icon name="settings"></ion-icon></button>
-      <button ion-button round item-right (click)="deleteSurveyTemplate($event, survey_template)"><ion-icon name="trash"></ion-icon></button>
+      {{survey_template.title}}
+      <!-- <button ion-button round item-right (click)="editSurveyTemplate($event, survey_template)"><ion-icon name="settings"></ion-icon></button> -->
+      <button id="rightbtn1" ion-button round item-right (click)="exportSurveys($event, survey_template.title)"><ion-icon name="download"></ion-icon></button>
+      <button id="rightbtn2" ion-button round item-right (click)="deleteSurveyTemplate($event, survey_template)"><ion-icon name="trash"></ion-icon></button>
         <!-- TODO confirmation dialog for delete -->
     </ion-item>
   </ion-list>
 
-  <ion-title>
-    Surveys
-  </ion-title>
-  <ion-list reorder="true" (ionItemReorder)="reorderItem($event)">
-    <ion-item  *ngFor="let item of items" (click)="viewItem(item)">
-      <!-- {{item.title}} -->
-      <button ion-button round item-right (click)="editItem(item)"><ion-icon name="settings"></ion-icon></button>
+  <!-- <ion-list reorder="true" (ionItemReorder)="reorderSurvey($event)"> -->
+  <ion-list>
+    <ion-item>
+      <ion-title>
+        Vyplněné dotazníky
+      </ion-title>
+    </ion-item>
+
+    <ion-item  *ngFor="let s of surveyTitles" (click)="viewSurveyList($event, s)">
+      <button ion-button round item-left>{{collapsedSurveys[s]}}</button>
+      {{s}}
+      <!-- <button ion-button round item-right (click)="deleteSurvey($event, survey)"><ion-icon name="trash"></ion-icon></button> -->
+      <button ion-button round item-right (click)="deleteSurveysAsk($event, s)"><ion-icon name="trash"></ion-icon></button>
+
     </ion-item>
   </ion-list>
 </ion-content>

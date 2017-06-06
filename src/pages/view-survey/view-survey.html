@@ -1,0 +1,18 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Vyplněný dotazník {{title}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <ion-item>
+    <ion-label floating>Title</ion-label>
+    <ion-input type="text" [(ngModel)]="title"></ion-input>
+  </ion-item>
+
+  <form class="formly" role="form" novalidate [formGroup]="form">
+    <formly-form [model]="template" [fields]="templateFields"></formly-form>
+  </form>
+</ion-content>

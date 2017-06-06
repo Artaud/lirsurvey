@@ -35,36 +35,29 @@
     <div *ngIf="fieldType=='textarea'"></div>
 
     <div *ngIf="fieldType=='select'">
-      Select -- option fields should be rendered
-      <ion-label stacked>Možnosti</ion-label>
-      <ion-list reorder="true" (ionItemReorder)="reorderItem($event)">
+      <ion-label stacked style="background: white;">Možnosti</ion-label>
+      <ion-list style="background: white;">
         <div  *ngFor="let selectOption of selectOptions">
-          <ion-input type="input" [(ngModel)]="selectOption.label">Option: {{selectOption.label}}</ion-input>
+          <ion-input class="border-bottom" type="input" [(ngModel)]="selectOption.label">Option: {{selectOption.label}}</ion-input>
         </div>
       </ion-list>
-      <button full ion-button color="secondary" (click)="addSelectOption()">Add select option</button>
+      <button full ion-button color="secondary" (click)="addSelectOption()">Přidat možnost</button>
     </div>
 
+    <div *ngIf="fieldType=='checkbox'"></div>
 
-    <div *ngIf="fieldType=='checkbox'">
-      <!-- <ion-label stacked>Checkbox</ion-label> -->
-      <!-- <ion-input type="input" [(ngModel)]="question"></ion-input> -->
-    </div>
-
-    <div *ngIf="fieldType=='multicheckbox'">multicheckbox -- render options
-      Select -- option fields should be rendered
-      <ion-label stacked>Možnosti</ion-label>
-      <ion-list reorder="true" (ionItemReorder)="reorderItem($event)">
+    <div *ngIf="fieldType=='multicheckbox'">
+      <ion-label stacked style="background: white;">Možnosti</ion-label>
+      <ion-list  style="background: white;">
         <div  *ngFor="let multicheckboxOption of multicheckboxOptions">
-          <ion-input type="input" [(ngModel)]="multicheckboxOption.value">Option: {{multicheckboxOption.value}}</ion-input>
+          <ion-input class="border-bottom" type="input" [(ngModel)]="multicheckboxOption.value">Option: {{multicheckboxOption.value}}</ion-input>
         </div>
       </ion-list>
-      <button full ion-button color="secondary" (click)="addMulticheckboxOption()">Add select option</button>
+      <button full ion-button color="secondary" (click)="addMulticheckboxOption()">Přidat možnost</button>
     </div>
 
   </ion-list>
 
-
-  <button full ion-button color="primary" (click)="saveTemplateField()">Save</button>
+  <button full ion-button color="primary" [disabled]="!question" (click)="saveTemplateField()">Uložit pole</button>
 
 </ion-content>

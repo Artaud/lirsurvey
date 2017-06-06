@@ -14,3 +14,53 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+
+.toolbar-title, button, .form-control-label, .title-label {
+  font-family: 'rbno3bold';
+}
+form, ion-input, ion-label {
+  font-family: 'rbno3light'
+}
+.title-label {
+  color: black !important;
+}
+
+ion-item {
+  background-color: rgba(255,255,255,0.78) !important;
+}
+ion-input {
+  background-color: rgba(255,255,255,1) ;
+}
+select {
+  height: 2em;
+}
+
+.form-group {
+  margin-bottom: 1em;
+}
+
+.form-control {
+  width: 100%;
+  line-height: 2em;
+  margin-top: 0.5em;
+  border: none;
+  border-bottom: 1px solid grey;
+  border-radius: 2%;
+  padding-left: 0.7em;
+}
+
+.border-bottom {
+  border-bottom: 1px solid grey;
+}
+
+// .fixed-content {
+ion-content {
+  // background-image: url("../assets/img/stage2.jpg");
+  background-size: cover;
+  // background-color: black;
+}
+
+.noborder > .item-inner {
+  border: none;
+}

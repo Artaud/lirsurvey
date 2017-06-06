@@ -1,14 +1,22 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>EditSurvey</ion-title>
+    <ion-title><span style="color:red;">{{title}}:</span> Upravit odpovědi</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 <ion-content padding>
-  <form class="formly" role="form" novalidate [formGroup]="form" (ngSubmit)="submit(template)">
-    <formly-form [model]="template" [fields]="templateFields"></formly-form>
+
+<!--   <ion-item>
+    <ion-label floating>Title</ion-label>
+    <ion-input type="text" [(ngModel)]="title"></ion-input>
+  </ion-item> -->
+
+  <form class="formly" role="form" novalidate [formGroup]="form" (ngSubmit)="submit(survey)">
+    <formly-form [model]="survey" [fields]="templateFields"></formly-form>
+    <button ion-button type="submit">Uložit úpravy</button>
   </form>
-  <button ion-button type="submit" (click)="saveTemplate()">Save template</button>
+
+  <button ion-button type="submit" (click)="saveSurvey(survey)">Uložit úpravy</button>
 </ion-content>

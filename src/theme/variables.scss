@@ -25,11 +25,14 @@ $fab-content-margin: 30px;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #387ef5,
-  secondary:  #32db64,
+  // primary:    #387ef5,
+  primary:    black,
+  // secondary:  #32db64,
+  secondary:  red,
   danger:     #f53d3d,
   light:      #f4f4f4,
-  dark:       #222
+  dark:       #222,
+  white:      white
 );
 
 
@@ -77,3 +80,28 @@ $colors: (
 
 @import "roboto";
 @import "noto-sans";
+
+@font-face {
+    font-family: 'rbno3thin';
+    src: url('../assets/fonts/RBNo3.1-Thin.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'rbno3light';
+    src: url('../assets/fonts/RBNo3.1-Light.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'rbno3book';
+    src: url('../assets/fonts/RBNo3.1-Book.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'rbno3bold';
+    src: url('../assets/fonts/RBNo3.1-Bold.otf');
+    font-weight: normal;
+    font-style: normal;
+}
