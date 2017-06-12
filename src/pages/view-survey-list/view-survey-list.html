@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title><span style="color:red;">{{title}}:</span> Vyplněné dotazníky</ion-title>
+    <ion-title><span style="color:red;">{{title}}:</span> {{ "FINISHED SURVEYS" | translate }}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -17,7 +17,9 @@
 
   <ion-list>
 
-    <ion-item  *ngFor="let s of surveys" (click)="editSurvey($event, s)">{{s.surveyTitle}}: {{s.firstName}} {{s.lastName}}, {{s.email}}</ion-item>
+    <ion-item  *ngFor="let s of surveys" (click)="editSurvey($event, s)">{{s.surveyTitle}}: {{s.firstName}} {{s.lastName}}, {{s.email}}, {{s.country}}
+      <button ion-button round item-right><ion-icon name="arrow-forward"></ion-icon></button>
+    </ion-item>
 
   </ion-list>
 

@@ -25,6 +25,7 @@ TODO:
 [x] checkboxy se prevadeji do CSV jako [Object object]
 [x] existing file checks (currently should rewrite)
 [x] email required
+[ ] i18n
 
 
 install macos in vm
@@ -76,7 +77,7 @@ function resetForm(form) {
 
 
 NEW TODO
-[] hacky carky se ukladaji divne --
+[x] hacky carky se ukladaji divne --
     2)      Po ukončení práce v dotazníku mi kontakty nešly otevřít v poznamkovém bloku a házelo to chybu, šlo to jen přes excel
 
 3)      Holky v průběhu práce zjistili několik dalších postřehů, které by jim pomohlo v práci, jestli bys mohl zapracovat

@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar color="primary">
-    <ion-title>Upravit vzor {{title}}</ion-title>
+    <ion-title>{{ "EDIT TEMPLATE" | translate }} {{title}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -9,7 +9,7 @@
 <ion-content padding>
 
   <ion-item>
-    <ion-label floating>Title</ion-label>
+    <ion-label floating>{{ "TITLE" | translate }}</ion-label>
     <ion-input type="text" [(ngModel)]="title"></ion-input>
   </ion-item>
 
@@ -18,5 +18,5 @@
   <form class="formly" role="form" [formGroup]="form" (ngSubmit)="submit(template)">
     <formly-form [model]="template" [fields]="templateFields"></formly-form>
   </form>
-  <button ion-button type="submit" (click)="saveTemplate(survey_template)">Save template</button>
+  <button ion-button type="submit" (click)="saveTemplate(survey_template)">{{ "SAVE TEMPLATE" | translate }}</button>
 </ion-content>

@@ -29,8 +29,18 @@ import { RunSurveyPage } from '../pages/run-survey/run-survey';
 import { ViewSurveyPage } from '../pages/view-survey/view-survey';
 import { ViewSurveyListPage } from '../pages/view-survey-list/view-survey-list';
 import { SettingsPage } from '../pages/settings/settings';
+import { I18nModule } from '../pages/i18n/i18n.module';
+import { TranslateModule } from 'ng2-translate/ng2-translate';
+import { TranslateLoader, TranslateStaticLoader } from 'ng2-translate/src/translate.service';
+import { Http } from '@angular/http';
+
 
 import { BackgroundImage } from '../components/backgroundImage/backgroundImage.ts'
+
+export function createTranslateLoader(http: Http) {
+    return new TranslateStaticLoader(http, 'assets/i18n', '.json');
+}
+
 
 @NgModule({
   declarations: [
@@ -55,11 +65,19 @@ import { BackgroundImage } from '../components/backgroundImage/backgroundImage.t
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, {
+
+    }),
     IonicStorageModule.forRoot(),
     ReactiveFormsModule,
     FormlyModule.forRoot(),
     FormlyBootstrapModule,
+    I18nModule,
+    TranslateModule.forRoot({
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [Http]
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [

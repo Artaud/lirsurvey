@@ -5,6 +5,9 @@ import { SettingsData } from '../../providers/data';
 import { File } from '@ionic-native/file';
 import { FilePath } from '@ionic-native/file-path';
 
+import { availableLanguages, sysOptions } from '../i18n/i18n.constants';
+import { TranslateService } from 'ng2-translate';
+
 declare var cordova: any;
 /*
   Generated class for the Settings page.
@@ -20,7 +23,13 @@ export class SettingsPage {
 
   lastImage: string = null;
 
-  constructor(private camera: Camera, private file: File, private filePath: FilePath, public navCtrl: NavController, public navParams: NavParams, public settingsDataService: SettingsData, public platform: Platform, public toastCtrl: ToastController) {}
+  languages = availableLanguages;
+  selectedLanguage = sysOptions.systemLanguage;
+  private translate: TranslateService;
+
+  constructor(private camera: Camera, private file: File, private filePath: FilePath, public navCtrl: NavController, public navParams: NavParams, public settingsDataService: SettingsData, public platform: Platform, public toastCtrl: ToastController, translate: TranslateService) {
+    this.translate = translate
+  }
 
   parent = this.navParams.get('parent');
 
@@ -33,8 +42,11 @@ export class SettingsPage {
     console.log(this.settingsDataService.getBackgroundImageUrl());
   }
 
-  changeBackground(){
+  applyLanguage() {
+    this.translate.use(this.selectedLanguage);
+  }
 
+  changeBackground(){
     var options = {
         sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
         destinationType: this.camera.DestinationType.FILE_URI,

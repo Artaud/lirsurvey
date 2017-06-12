@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title><span style="color:red;">{{title}}:</span> Upravit odpovědi</ion-title>
+    <ion-title><span style="color:red;">{{title}}:</span> {{ "EDIT ANSWERS" | translate }}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -15,8 +15,8 @@
 
   <form class="formly" role="form" novalidate [formGroup]="form" (ngSubmit)="submit(survey)">
     <formly-form [model]="survey" [fields]="templateFields"></formly-form>
-    <button ion-button type="submit">Uložit úpravy</button>
+    <button ion-button type="submit">{{ "SAVE" | translate}}</button>
   </form>
 
-  <button ion-button type="submit" (click)="saveSurvey(survey)">Uložit úpravy</button>
+  <!-- <button ion-button type="submit" (click)="saveSurvey(survey)">Uložit úpravy</button> -->
 </ion-content>

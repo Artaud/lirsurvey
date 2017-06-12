@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Utils } from '../../utils/utils.ts';
+import { Utils } from '../../utils/utils';
 
 import { ModalController, NavController, NavParams, reorderArray, Platform, AlertController } from 'ionic-angular';
 import { AddItemPage } from '../add-item/add-item';
@@ -23,6 +23,10 @@ import { File } from '@ionic-native/file';
 
 import { SettingsData } from '../../providers/data';
 
+import { availableLanguages, sysOptions } from '../i18n/i18n.constants';
+import { TranslateService } from 'ng2-translate';
+
+
 // declare var cordova:any;
 
 @Component({
@@ -39,13 +43,32 @@ export class HomePage {
   public base64Image: string;
   storageDirectory: string = '';
 
+  languages = availableLanguages;
+  selectedLanguage = sysOptions.systemLanguage;
+  // param = { value: 'world' };
+  private translate: TranslateService;
+  really_delete;
+  really_delete_template;
+  no;
+  del;
+  csv_saved;
+  survey_data_saved;
+  really_delete_survey_data;
+
   titleImageUrl: string = 'assets/img/LIRlogoinverse.png';
   bkgImageUrl: string = 'assets/img/stage2.jpg';
   // public testBkg: string = 'file:///storage/emulated/0/DCIM/Camera/IMG_20170531_164530.jpg';
 
 
 
-  constructor(public navCtrl: NavController, public platform: Platform, public alertCtrl: AlertController, public modalCtrl: ModalController, private navParams: NavParams, public todoDataService: TodoData, public surveyTemplateDataService: SurveyTemplateData, public surveyDataService: SurveyData, public settingsDataService: SettingsData, private file: File) {
+  constructor(public navCtrl: NavController, public platform: Platform, public alertCtrl: AlertController, public modalCtrl: ModalController, private navParams: NavParams, public todoDataService: TodoData, public surveyTemplateDataService: SurveyTemplateData, public surveyDataService: SurveyData, public settingsDataService: SettingsData, private file: File, translate: TranslateService) {
+
+// ================= Constructor -- I18N ====================
+// ===========================================================
+
+  this.translate = translate;
+
+
 
 // ================= Constructor -- FILES ====================
 // ===========================================================
@@ -93,8 +116,18 @@ export class HomePage {
     });
   }
 
+// ================= LIFECYCLE METHODS ====================
+// ===========================================
+
   ionViewDidLoad(){
     console.log(this.survey_templates);
+  }
+
+// ================= I18N ====================
+// ===========================================
+
+  applyLanguage() {
+    this.translate.use(this.selectedLanguage);
   }
 
 // ================= BKG IMG // LOGO ===========================
@@ -166,18 +199,23 @@ export class HomePage {
   }
   deleteSurveyTemplate(e, survey_template){
     e.stopPropagation();
+    this.translate.get('REALLY DELETE').subscribe(value => {this.really_delete = value;})
+    this.translate.get('REALLY DELETE TEMPLATE', {title: survey_template.title}).subscribe(value => {this.really_delete_template = value;})
+    this.translate.get('NO').subscribe(value => {this.no = value;})
+    this.translate.get('DELETE').subscribe(value => {this.del = value;})
+
     let confirm = this.alertCtrl.create({
-      title: 'Opravdu smazat?',
-      message: 'Chcete opravdu smazat vzor "' + survey_template.title + '" i se všemi souvisejícími vyplněnými dotazníky?',
+      title: this.really_delete,
+      message: this.really_delete_template,
       buttons: [
         {
-          text: 'Ne',
+          text: this.no,
           handler: () => {
             console.log('Disagree clicked');
           }
         },
         {
-          text: 'Smazat',
+          text: this.del,
           handler: () => {
             this.deleteSurveys(survey_template.title);
 
@@ -196,6 +234,10 @@ export class HomePage {
   }
   exportSurveys(e, title){
     e.stopPropagation();
+
+    this.translate.get('CSV SAVED').subscribe(value => {this.csv_saved = value;})
+    this.translate.get('SURVEY DATA SAVED', {title: title, dir: this.storageDirectory}).subscribe(value => {this.survey_data_saved = value;})
+
 
     let selectedSurveys = this.surveys.filter(function(el){
         return el.surveyTitle == title;
@@ -234,8 +276,8 @@ export class HomePage {
       });
 
       let confirm = this.alertCtrl.create({
-        title: 'CSV bylo uloženo.',
-        message: 'Data k dotazníku "' + title + '" byla uložena do ' + this.storageDirectory + 'LIR-' + title + '.csv',
+        title: this.csv_saved,
+        message: this.survey_data_saved,
         buttons: [
           {
             text: 'OK',
@@ -339,18 +381,24 @@ export class HomePage {
   deleteSurveysAsk(e, surveyTitle){
     e.stopPropagation();
 
+    this.translate.get('REALLY DELETE').subscribe(value => {this.really_delete = value;})
+    this.translate.get('REALLY DELETE SURVEY DATA', {title: surveyTitle}).subscribe(value => {this.really_delete_survey_data = value;})
+    this.translate.get('NO').subscribe(value => {this.no = value;})
+    this.translate.get('DEL').subscribe(value => {this.del = value;})
+
+
     let confirm = this.alertCtrl.create({
-      title: 'Opravdu smazat?',
-      message: '<p>Chcete opravdu smazat <strong>všechny vyplněné dotazníky</strong> vzoru "' + surveyTitle + '"?</p><p>(Vzor zůstane zachován.)</p>',
+      title: this.really_delete,
+      message: this.really_delete_survey_data,
       buttons: [
         {
-          text: 'Ne',
+          text: this.no,
           handler: () => {
             console.log('Disagree clicked');
           }
         },
         {
-          text: 'Smazat',
+          text: this.del,
           handler: () => {
             this.platform.ready().then(() => {
               // make sure this is on a device, not an emulation (e.g. chrome tools device mode)

@@ -35,6 +35,9 @@ ion-input {
 select {
   height: 2em;
 }
+.noborder .item-inner {
+  border-bottom: none !important;
+}
 
 .form-group {
   margin-bottom: 1em;

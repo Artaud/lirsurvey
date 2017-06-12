@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar color="primary">
-    <ion-title>Vyplnit dotazník <span style="color:red;">{{title}}</span></ion-title>
+    <ion-title>{{ "ANSWERING SURVEY" | translate }} <span style="color:red;">{{title}}</span></ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -11,7 +11,7 @@
   <ion-item>
     <form class="formly" role="form" [formGroup]="form" (ngSubmit)="submit(survey, form)">
       <formly-form [model]="survey" [fields]="surveyFields">
-        <button ion-button full [disabled]="!survey.email" type="submit">Uložit dotazník</button>
+        <button ion-button full [disabled]="!survey.email" type="submit">{{ "SAVE" | translate }}</button>
       </formly-form>
       <!-- <button ion-button full type="reset" (click)="resetFields()" (click)="submit(survey)">Reset fields</button> -->
     </form>

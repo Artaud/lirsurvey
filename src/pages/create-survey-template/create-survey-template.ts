@@ -4,6 +4,8 @@ import { Validators, FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from 'ng2-formly';
 import {AddTemplateFieldPage} from '../add-template-field/add-template-field';
 import {FormlyMaterialModule, FormlyMaterial} from "../src/templates/formlyMaterial";
+import { availableLanguages, sysOptions } from '../i18n/i18n.constants';
+import { TranslateService } from 'ng2-translate';
 
 
 @Component({
@@ -11,14 +13,29 @@ import {FormlyMaterialModule, FormlyMaterial} from "../src/templates/formlyMater
   templateUrl: 'create-survey-template.html'
 })
 export class CreateSurveyTemplatePage {
+    firstName = "First name";
+    lastName = "Last name";
+    email = "Email";
+    country = "Country";
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, public alertCtrl: AlertController) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, public alertCtrl: AlertController, translate: TranslateService) {
+
+    this.translate = translate;
+    this.translate.get('FIRST NAME').subscribe(value => {this.firstName = value;})
+    this.translate.get('LAST NAME').subscribe(value => {this.lastName = value;})
+    this.translate.get('EMAIL').subscribe(value => {this.email = value;})
+    this.translate.get('COUNTRY').subscribe(value => {this.country = value;})
+  }
 
     parent = this.navParams.get('parent');
 
     title;
     templateField: FormlyFieldConfig;
     form: FormGroup = new FormGroup({});
+
+    private translate: TranslateService;
+
+
 
     initFieldGroup = {
       fieldGroup: [
@@ -28,7 +45,7 @@ export class CreateSurveyTemplatePage {
           type: 'input',
           templateOptions: {
               type: 'input',
-              label: 'Křestní jméno',
+              label: this.firstName,
               placeholder: ''
           },
           validators: {
@@ -41,7 +58,7 @@ export class CreateSurveyTemplatePage {
           type: 'input',
           templateOptions: {
               type: 'input',
-              label: 'Příjmení',
+              label: this.lastName,
               placeholder: ''
           },
           validators: {
@@ -54,7 +71,7 @@ export class CreateSurveyTemplatePage {
           type: 'input',
           templateOptions: {
               type: 'email',
-              label: 'Email',
+              label: this.email,
               placeholder: ''
           },
           validators: {
@@ -313,7 +330,7 @@ export class CreateSurveyTemplatePage {
                 {label: 'Zimbabwe', value: 'ZW'}
               ],
               type: 'select',
-              label: 'Země',
+              label: this.country,
               placeholder: ''
           },
           validators: {
@@ -345,7 +362,7 @@ export class CreateSurveyTemplatePage {
 
     removeLastTemplateField(){
         let confirm = this.alertCtrl.create({
-          title: 'Smazat poslední pole?',
+          title: 'Delete the last field?',
           buttons: [
             {
               text: 'Ne',
@@ -354,7 +371,7 @@ export class CreateSurveyTemplatePage {
               }
             },
             {
-              text: 'Smazat pole',
+              text: 'Delete field',
               handler: () => {
                   let tfLen = this.templateFields[0].fieldGroup.length;
                   this.templateFields[0].fieldGroup.splice(tfLen-1,1);

@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar color="primary">
-    <ion-title>Nový vzor</ion-title>
+    <ion-title>{{ "NEW TEMPLATE" | translate}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -9,7 +9,7 @@
 <ion-content padding>
 
   <ion-item class="noborder">
-    <ion-label class="title-label">Název vzoru</ion-label>
+    <ion-label class="title-label">{{ "TEMPLATE NAME" | translate}}</ion-label>
     <ion-input class="border-bottom" required type="text" [(ngModel)]="title"></ion-input>
   </ion-item>
 
@@ -20,13 +20,13 @@
         <formly-form [model]="template" [fields]="templateFields"></formly-form>
     </form>
     <span>
-      <button ion-button (click)="removeLastTemplateField()">Smazat poslední pole</button>
+      <button ion-button (click)="removeLastTemplateField()">{{ "DELETE LAST FIELD" | translate }}</button>
     </span>
     <span style="float: right;">
-      <button ion-button (click)="selectTemplateFieldToAdd()">Přidat pole</button>
+      <button ion-button (click)="selectTemplateFieldToAdd()">{{ "ADD FIELD" | translate }}</button>
     </span>
   </ion-item>
 
-  <button ion-button full type="submit" [disabled]="!title" (click)="saveTemplate()">Uložit vzor</button>
+  <button ion-button full type="submit" [disabled]="!title" (click)="saveTemplate()">{{ "SAVE TEMPLATE" | translate }}</button>
 
 </ion-content>

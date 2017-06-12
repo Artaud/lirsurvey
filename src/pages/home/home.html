@@ -27,7 +27,7 @@
   <ion-list>
     <ion-item>
       <ion-title>
-        Vzory
+        {{ "TEMPLATES" | translate }}
       </ion-title>
     </ion-item>
     <ion-item *ngFor="let survey_template of survey_templates" (click)="startNewSurvey($event, survey_template)">
@@ -43,7 +43,7 @@
   <ion-list>
     <ion-item>
       <ion-title>
-        Vyplněné dotazníky
+        {{ "FINISHED SURVEYS" | translate }}
       </ion-title>
     </ion-item>
 

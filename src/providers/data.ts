@@ -1,6 +1,8 @@
 import { Storage } from '@ionic/storage';
 import { Injectable } from '@angular/core';
 import { ToastController } from 'ionic-angular';
+import { availableLanguages, sysOptions } from '../i18n/i18n.constants';
+import { TranslateService } from 'ng2-translate';
 
 @Injectable()
 export class TodoData {
@@ -38,7 +40,14 @@ export class SurveyTemplateData {
 
 @Injectable()
 export class SurveyData {
-  constructor(public storage: Storage, private toastCtrl: ToastController){}
+
+  private translate: TranslateService;
+  saved;
+
+  constructor(public storage: Storage, private toastCtrl: ToastController, translate: TranslateService){
+    this.translate = translate;
+    this.translate.get('SAVED').subscribe(value => {this.saved = value;})
+  }
 
   getData() {
     return this.storage.get('surveys');

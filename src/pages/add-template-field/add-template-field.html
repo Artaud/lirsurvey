@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="secondary">
     <ion-title>
-        Přidat pole
+        {{ "ADD FIELD" | translate }}
     </ion-title>
         <ion-buttons end>
             <button ion-button icon-only (click)="close()"><ion-icon name="close"></ion-icon></button>
@@ -14,18 +14,18 @@
   <ion-list>
 
     <ion-item>
-      <ion-label stacked>Druh pole</ion-label>
+      <ion-label stacked>{{ "FIELD TYPE" | translate }}</ion-label>
       <ion-select [(ngModel)]="fieldType" interface="action-sheet">
-        <ion-option value="input" selected="true">Krátký text</ion-option>
-        <ion-option value="textarea">Dlouhý text</ion-option>
-        <ion-option value="select">Dropdown</ion-option>
-        <ion-option value="checkbox">Checkbox - ano/ne</ion-option>
-        <ion-option value="multicheckbox">Skupina checkboxů</ion-option>
+        <ion-option value="input" selected="true">{{ "SHORT TEXT" | translate }}</ion-option>
+        <ion-option value="textarea">{{ "LONG TEXT" | translate }}</ion-option>
+        <ion-option value="select">{{ "DROPDOWN" | translate }}</ion-option>
+        <ion-option value="checkbox">{{ "CHECKBOX" | translate }}</ion-option>
+        <ion-option value="multicheckbox">{{ "CHECKBOX GROUP" | translate }}</ion-option>
       </ion-select>
     </ion-item>
 
     <ion-item>
-      <ion-label stacked>Otázka</ion-label>
+      <ion-label stacked>{{ "QUESTION" | translate }}</ion-label>
       <ion-input type="textarea" [(ngModel)]="question"></ion-input>
       {{question}}
     </ion-item>
@@ -35,29 +35,29 @@
     <div *ngIf="fieldType=='textarea'"></div>
 
     <div *ngIf="fieldType=='select'">
-      <ion-label stacked style="background: white;">Možnosti</ion-label>
+      <ion-label stacked style="background: white;">{{ "OPTIONS" | translate }}</ion-label>
       <ion-list style="background: white;">
         <div  *ngFor="let selectOption of selectOptions">
           <ion-input class="border-bottom" type="input" [(ngModel)]="selectOption.label">Option: {{selectOption.label}}</ion-input>
         </div>
       </ion-list>
-      <button full ion-button color="secondary" (click)="addSelectOption()">Přidat možnost</button>
+      <button full ion-button color="secondary" (click)="addSelectOption()">{{ "ADD OPTION" | translate }}</button>
     </div>
 
     <div *ngIf="fieldType=='checkbox'"></div>
 
     <div *ngIf="fieldType=='multicheckbox'">
-      <ion-label stacked style="background: white;">Možnosti</ion-label>
+      <ion-label stacked style="background: white;">{{ "OPTIONS" | translate }}</ion-label>
       <ion-list  style="background: white;">
         <div  *ngFor="let multicheckboxOption of multicheckboxOptions">
-          <ion-input class="border-bottom" type="input" [(ngModel)]="multicheckboxOption.value">Option: {{multicheckboxOption.value}}</ion-input>
+          <ion-input class="border-bottom" type="input" [(ngModel)]="multicheckboxOption.value">{{ "OPTION" | translate }}Option: {{multicheckboxOption.value}}</ion-input>
         </div>
       </ion-list>
-      <button full ion-button color="secondary" (click)="addMulticheckboxOption()">Přidat možnost</button>
+      <button full ion-button color="secondary" (click)="addMulticheckboxOption()">{{ "ADD OPTION" | translate }}</button>
     </div>
 
   </ion-list>
 
-  <button full ion-button color="primary" [disabled]="!question" (click)="saveTemplateField()">Uložit pole</button>
+  <button full ion-button color="primary" [disabled]="!question" (click)="saveTemplateField()">{{ "SAVE FIELD" | translate }}</button>
 
 </ion-content>
